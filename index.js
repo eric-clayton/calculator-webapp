@@ -52,7 +52,10 @@ function handleButtonClick(e) {
     const OPERATORS = '+/-*=%'
     const buttonText = e.target.textContent
     if(OPERATORS.includes(buttonText)) {
-        if (buttonText == '=') {
+        if (display === 'Cannot divide by zero') {
+            return;
+        }
+        else if (buttonText == '=') {
             inputEquals();
         }
         else if (buttonText == '+/-' || buttonText == '%') {
@@ -82,13 +85,15 @@ function inputEquals() {
         operand2 = +display;
     }
     display = operate(operand1, operator, operand2);
+    if (display === 'Cannot divide by zero') {
+        return divideByZero();
+    }
     operand1 = null
     displayReset = true;
 }
 function inputOperator(newOperator) {
     if (operand1 === null) {
         operand1 = +display;
-        operand2 = null
     }
     else if (operand2 === null) {
         if(displayReset) {
@@ -96,10 +101,13 @@ function inputOperator(newOperator) {
             return;
         }
         operand2 = +display;
-    }
-    if(operand1 !== null && operand2 !== null && operator !== null) {
-        display = operate(operand1, operator, operand2)
-        operand1 = display;
+        if(operand1 !== null && operand2 !== null && operator !== null) {
+            display = operate(operand1, operator, operand2)
+            if (display === 'Cannot divide by zero') {
+                return divideByZero();
+            }
+            operand1 = display;
+        }
     }
     operand2 = null;
     operator = newOperator;
@@ -132,4 +140,10 @@ function inputOperand(operand) {
         }
     }
     display += operand;
+}
+function divideByZero() {
+    operand1 = null;
+    displayReset = true;
+    operand2 = null;
+    operator = null;
 }
