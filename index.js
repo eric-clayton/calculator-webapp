@@ -131,6 +131,7 @@ function inputOperand(operand) {
     }
     if(displayReset || display == '0') {
         display = operand === '.' ? "0" : "";
+        decimal = false;
         displayReset = false;
     }
     if(operand == '.') {
