@@ -43,6 +43,7 @@ let operand1 = null;
 let operand2 = null;
 let operator = null;
 let displayReset = true;
+let activeOperatorButton = null;
 const calculatorButtons = document.querySelector('.calculator-buttons');
 calculatorButtons.addEventListener('click', handleButtonClick)
 function handleButtonClick(e) {
@@ -62,6 +63,7 @@ function handleButtonClick(e) {
             display = operate(+display, buttonText);
         }
         else {
+            switchActiveOperatorButton(e.target);
             inputOperator(buttonText);
         }
     }
@@ -72,7 +74,6 @@ function handleButtonClick(e) {
         inputOperand(buttonText);
     }
     displayNode.textContent = display;
-    // ${operand1 === null ? display : operand1} ${operator ? operator : ''} ${operator !== null ? operand2 != null ? operand2 : display :  ''}`
 }
 function inputEquals() {
     if (operand1 === null && operand2 === null) {
@@ -114,6 +115,7 @@ function inputOperator(newOperator) {
     displayReset = true;
 }
 function inputClear() {
+    switchActiveOperatorButton(null);
     operand1 = null;
     operand2 = null;
     operator = null;
@@ -146,4 +148,15 @@ function divideByZero() {
     displayReset = true;
     operand2 = null;
     operator = null;
+}
+function switchActiveOperatorButton(operatorButton) {
+    if (operatorButton != activeOperatorButton) {
+        if (activeOperatorButton != null) {
+            activeOperatorButton.classList.remove("active-operator")
+        }
+        activeOperatorButton = operatorButton;
+        if (activeOperatorButton != null) {
+            activeOperatorButton.classList.add("active-operator");
+        }
+    }
 }

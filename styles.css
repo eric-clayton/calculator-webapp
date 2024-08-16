@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+}
+.container {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calculator {
+    border: 2px solid black;
+    width: 300px;
+}
+#display{
+    text-align: right;
+    padding: 10px 2px;
+}
+.calculator-buttons {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    padding: 0;
+    display: block;
+}
+.row {
+    flex: 1;
+    display: flex;
+}
+.row button{
+    flex: 1;
+}
+.row.bottom button{
+    flex: 1;
+}
+.row.bottom :first-child {
+    flex: 2;
+}
+.active-operator {
+    background-color: darkgrey;
+}
