@@ -30,7 +30,7 @@ function operate(operand1, operator, operand2) {
         case '+/-':
             return operand1 * -1;
         case '%':
-            return operand1 / 10;
+            return operand1 / 100;
         default:
             return "Not a valid operator";
     }
